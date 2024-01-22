@@ -133,10 +133,10 @@ public class PlayerMovementAdvanced : MonoBehaviour
     {
         // Mode-walrunning
 
-        if(wallrunning)
+        if (wallrunning)
         {
             state = MovementState.wallrunning;
-           
+
         }
 
         // Mode - Sliding
@@ -151,7 +151,7 @@ public class PlayerMovementAdvanced : MonoBehaviour
                 desiredMoveSpeed = sprintSpeed;
         }
         // Mode - Crouching
-       else if (Input.GetKey(crouchKey))
+        else if (Input.GetKey(crouchKey))
         {
             state = MovementState.crouching;
             desiredMoveSpeed = crouchSpeed;
@@ -161,7 +161,7 @@ public class PlayerMovementAdvanced : MonoBehaviour
         else if (grounded && Input.GetKey(sprintKey))
         {
             state = MovementState.sprinting;
-           desiredMoveSpeed = sprintSpeed;
+            desiredMoveSpeed = sprintSpeed;
         }
 
         // Mode - Walking
@@ -178,7 +178,7 @@ public class PlayerMovementAdvanced : MonoBehaviour
         }
 
         //check if desiredMoveSpeed has changed drastically
-        if(Mathf.Abs(desiredMoveSpeed - lastDesiredMoveSpeed) > 4f && moveSpeed != 0)
+        if (Mathf.Abs(desiredMoveSpeed - lastDesiredMoveSpeed) > 4f && moveSpeed != 0)
         {
             StopAllCoroutines();
             StartCoroutine(SmoothlyLerpMoveSpeed());
@@ -196,9 +196,9 @@ public class PlayerMovementAdvanced : MonoBehaviour
         // smoothly lerp movementSpped to desired value
 
         float time = 0;
-        float difference = Mathf.Abs( desiredMoveSpeed - moveSpeed );
+        float difference = Mathf.Abs(desiredMoveSpeed - moveSpeed);
         float starValue = moveSpeed;
-        while (time< difference )
+        while (time < difference)
         {
             moveSpeed = Mathf.Lerp(starValue, desiredMoveSpeed, time / difference);
 
@@ -209,10 +209,10 @@ public class PlayerMovementAdvanced : MonoBehaviour
 
                 time += Time.deltaTime * speedIncreaseMultiplier * slopeIncreaseMiltiplier * slopeAngleIncrease;
             }
-            else 
-            time += Time.deltaTime * speedIncreaseMultiplier;
+            else
+                time += Time.deltaTime * speedIncreaseMultiplier;
 
-                yield return null;
+            yield return null;
         }
         moveSpeed = desiredMoveSpeed;
     }
