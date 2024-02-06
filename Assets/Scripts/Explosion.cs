@@ -10,6 +10,7 @@ public class Explosion: MonoBehaviour
     {
         if (other.gameObject.name.Contains("Enemy"))
         {
+            Debug.Log("Ha explotado");
             Instantiate(explosion, other.transform);
             Destroy(this.gameObject);
         }

@@ -12,5 +12,12 @@ public class GameController : MonoBehaviour
         musicaFondo = camara.GetComponent<AudioSource>();
         musicaFondo.Play();
     }
-
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.lockState = CursorLockMode.None;
+            UnityEngine.SceneManagement.SceneManager.LoadScene(4);
+        }
+    }
 }

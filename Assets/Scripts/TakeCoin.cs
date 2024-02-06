@@ -15,10 +15,10 @@ public class TakeCoin: MonoBehaviour
         void Update()
     {
 
-        if (totalCoins == 10)
+        if (totalCoins == 15)
         {
             Cursor.lockState = CursorLockMode.None;
-            UnityEngine.SceneManagement.SceneManager.LoadScene(4);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(6);
         }
     }
 
@@ -28,7 +28,7 @@ public class TakeCoin: MonoBehaviour
         {
 
             totalCoins++;
-            textocoin.text = totalCoins + " / 10";
+            textocoin.text = totalCoins + " / 15";
 
 
             Destroy(other.gameObject);
