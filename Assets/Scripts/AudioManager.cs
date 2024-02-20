@@ -5,13 +5,23 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
  
-    [SerializeField] private GameObject camara;
-    private AudioSource musicaFondo;
+    [SerializeField] private AudioSource musicSource;
+    [SerializeField] private AudioSource SFXSource;
+
+    public AudioClip background;
+    public AudioClip run;
+    public AudioClip shot;
+    public AudioClip jump;
+    public AudioClip coin;
 
     private void Start()
     {
-        musicaFondo = camara.GetComponent<AudioSource>();
-        musicaFondo.Play();
+        //musicSource.clip = background;
+        musicSource.Play();
+    }
+    public void PlaySFX(AudioClip clip)
+    {
+       SFXSource.PlayOneShot(clip); 
     }
 
 }

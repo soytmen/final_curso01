@@ -17,7 +17,7 @@ public class GameController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Cursor.lockState = CursorLockMode.None;
-            UnityEngine.SceneManagement.SceneManager.LoadScene(4);
+           
         }
     }
 }

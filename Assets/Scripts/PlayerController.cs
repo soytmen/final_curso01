@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     [Header("Movement")]
     private float moveSpeed;
     public float walkSpeed;
-    public float sprintSpeed;
+    
     
 
     public float groundDrag;
@@ -49,10 +49,17 @@ public class PlayerController : MonoBehaviour
     Rigidbody rb;
 
     public MovementState state;
+
+    AudioManager audioManager;
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
     public enum MovementState
     {
         walking,
-        sprinting,
+        
         crouching,
         air,
     }
@@ -132,14 +139,7 @@ public class PlayerController : MonoBehaviour
             moveSpeed = crouchSpeed;
 
         }
-        //Mode - Sprinting
-        if(grounded && Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            state = MovementState.sprinting;
-            moveSpeed = sprintSpeed;
-        }
-
-        //Mode - Walking
+               //Mode - Walking
         else if(grounded)
         {
             state |= MovementState.walking;
@@ -162,11 +162,17 @@ public class PlayerController : MonoBehaviour
 
         // on ground
         if (grounded)
+        {
+            //audioManager.PlaySFX(audioManager.run);
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+        }
+            
 
         // in air
         else if (!grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+        
+
     }
 
     private void SpeedControl()
@@ -190,6 +196,7 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
             rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+            audioManager.PlaySFX(audioManager.jump);
         }
         //Walljump
         if (isWallRunning)
@@ -206,22 +213,34 @@ public class PlayerController : MonoBehaviour
             if (isWallRight || isWallLeft && Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) rb.AddForce(-orientation.up * jumpForce * 1f);
             if (isWallRight && Input.GetKey(KeyCode.A)) rb.AddForce(-orientation.right * jumpForce * 3.2f);
             if (isWallLeft && Input.GetKey(KeyCode.D)) rb.AddForce(orientation.right * jumpForce * 3.2f);
-
+            
             //Always add forward force
             rb.AddForce(orientation.forward * jumpForce * 1f);
                                
             Invoke(nameof(ResetJump), jumpCooldown);
+            audioManager.PlaySFX(audioManager.jump);
         }
+        
     }
     private void ResetJump()
     {
         readyToJump = true;
     }
-               private void WallRunInput()
+    private void WallRunInput()
     {
         //Wallrun
-        if (Input.GetKey(KeyCode.D) && isWallRight) StartWallrun();
-        if (Input.GetKey(KeyCode.A) && isWallLeft) StartWallrun();
+        if (Input.GetKey(KeyCode.D) && isWallRight) 
+                {
+            StartWallrun();
+            audioManager.PlaySFX(audioManager.run);
+        }
+        if (Input.GetKey(KeyCode.A) && isWallLeft)
+        {
+            StartWallrun();
+            audioManager.PlaySFX(audioManager.run);
+        }
+        
+
     }
     private void StartWallrun()
     {
@@ -264,6 +283,6 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene(5);
     }
-    
+
 
 }

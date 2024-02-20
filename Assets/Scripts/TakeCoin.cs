@@ -8,6 +8,14 @@ public class TakeCoin: MonoBehaviour
     public Transform coins;
     public int totalCoins;
     public TMP_Text textocoin;
+
+    AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
     void Start()
     {
         totalCoins = coins.childCount;
@@ -29,6 +37,7 @@ public class TakeCoin: MonoBehaviour
 
             totalCoins++;
             textocoin.text = totalCoins + " / 15";
+            audioManager.PlaySFX(audioManager.coin);
 
 
             Destroy(other.gameObject);

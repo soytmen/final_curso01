@@ -11,6 +11,15 @@ public class Shot : MonoBehaviour
     public float shotRate = 0.5f;
 
     private float shotRateTime = 0;
+
+    public ParticleSystem shooting;
+
+    AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Mouse1))
@@ -20,12 +29,13 @@ public class Shot : MonoBehaviour
                 GameObject newbullet;
 
                 newbullet = Instantiate(bullet, SpawnPoint.position, SpawnPoint.rotation);
-
+                shooting.Play();
                 newbullet.GetComponent<Rigidbody>().AddForce(SpawnPoint.forward * shotForce);
-
+                audioManager.PlaySFX(audioManager.shot);
                 shotRateTime = Time.time +shotRate;
 
                 Destroy(newbullet, 2f);
+                
             }
         }
     }
