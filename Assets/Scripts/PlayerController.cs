@@ -46,6 +46,9 @@ public class PlayerController : MonoBehaviour
 
     Vector3 moveDirection;
 
+    private float timer;
+    private float timerMax = 0.1f;
+
     Rigidbody rb;
 
     public MovementState state;
@@ -59,7 +62,7 @@ public class PlayerController : MonoBehaviour
     public enum MovementState
     {
         walking,
-        
+        wallrun,
         crouching,
         air,
     }
@@ -74,8 +77,18 @@ public class PlayerController : MonoBehaviour
 
         startYScale = transform.localScale.y;
     }
-        private void Update()
+    private void Update()
     {
+        timer -= Time.deltaTime;
+        if (timer < 0)
+        {
+            timer = timerMax;
+            if(state == MovementState.walking || state == MovementState.wallrun)
+            {
+                audioManager.PlaySFX(audioManager.run);
+
+            }
+        }
         // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
         
@@ -140,14 +153,20 @@ public class PlayerController : MonoBehaviour
 
         }
                //Mode - Walking
-        else if(grounded)
+        else if(grounded && rb.velocity != Vector3.zero)
         {
+            Debug.Log("walking");
             state |= MovementState.walking;
             moveSpeed = walkSpeed;
         }
 
-        //Mode - air
+        //else if (grounded)
+        //{
+        //    state |= MovementState.walking;
+        //    moveSpeed = walkSpeed;
+        //}
 
+        //Mode - air
         else
         {
             state = MovementState.air;
@@ -163,7 +182,6 @@ public class PlayerController : MonoBehaviour
         // on ground
         if (grounded)
         {
-            //audioManager.PlaySFX(audioManager.run);
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
         }
             
@@ -280,6 +298,7 @@ public class PlayerController : MonoBehaviour
     }
     private void gameOver()
     {
+        Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene(5);
     }

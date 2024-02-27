@@ -12,18 +12,15 @@ EditorBuildSettings:
     path: Assets/Scenes/Game_1.unity
     guid: c4474cc9f76b54f4587bd70cde8a1646
   - enabled: 1
-    path: Assets/Scenes/Options_Menu.unity
-    guid: 081056e603417b3468cab37b169a801e
-  - enabled: 1
     path: Assets/Scenes/INSTRUCTIONS.unity
     guid: fa58bfe3a0eb9ad4999ce330b5b317e0
-  - enabled: 1
-    path: Assets/Scenes/Pause_menu.unity
-    guid: ea8eef77f45c07b4fb33644c6bc221af
   - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: 296d323e11f3b604db2a526ba645bb41
   - enabled: 1
     path: Assets/Scenes/Win.unity
     guid: f717a22eb2b6e68498d6ff8baa32df18
+  - enabled: 1
+    path: Assets/Scenes/game2.unity
+    guid: eace871a25d54064fb75f404046e6181
   m_configObjects: {}

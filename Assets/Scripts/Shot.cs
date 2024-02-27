@@ -16,9 +16,12 @@ public class Shot : MonoBehaviour
 
     AudioManager audioManager;
 
+    Animator animator;
+
     private void Awake()
     {
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        animator = gameObject.GetComponent<Animator>();
     }
     private void Update()
     {
@@ -27,16 +30,20 @@ public class Shot : MonoBehaviour
             if(Time.time > shotRateTime)
             {
                 GameObject newbullet;
-
+        
                 newbullet = Instantiate(bullet, SpawnPoint.position, SpawnPoint.rotation);
                 shooting.Play();
                 newbullet.GetComponent<Rigidbody>().AddForce(SpawnPoint.forward * shotForce);
                 audioManager.PlaySFX(audioManager.shot);
                 shotRateTime = Time.time +shotRate;
-
+                animator.SetTrigger("Fire");
                 Destroy(newbullet, 2f);
                 
             }
         }
     }
+
+
 }
+
+

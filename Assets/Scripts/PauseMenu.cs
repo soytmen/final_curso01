@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Purchasing;
 using UnityEngine;
-using UnityEngine.Rendering;
+
 
 public class PauseMenu : MonoBehaviour
 {
@@ -41,6 +38,7 @@ public class PauseMenu : MonoBehaviour
     }
    public void pause ()
     {
+        Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         PausePanel.SetActive(true);
         Debug.Log(PausePanel.activeInHierarchy);
@@ -48,6 +46,7 @@ public class PauseMenu : MonoBehaviour
     }
     public void pauseStop()
     {
+        Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         PausePanel.SetActive(false);
         Debug.Log(PausePanel.activeInHierarchy);
