@@ -25,8 +25,10 @@ public class TakeCoin: MonoBehaviour
 
         if (totalCoins == 15)
         {
+            
+            UnityEngine.SceneManagement.SceneManager.LoadScene(4);
             Cursor.lockState = CursorLockMode.None;
-            UnityEngine.SceneManagement.SceneManager.LoadScene(6);
+            Cursor.visible = true;
         }
     }
 

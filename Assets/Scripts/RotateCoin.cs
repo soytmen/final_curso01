@@ -11,13 +11,6 @@ public class RotateCoin : MonoBehaviour
         transform.Rotate(Vector3.up * RotateVelocity * Time.deltaTime);
     }
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {

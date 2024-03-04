@@ -46,8 +46,7 @@ public class PlayerController : MonoBehaviour
 
     Vector3 moveDirection;
 
-    private float timer;
-    private float timerMax = 0.1f;
+    
 
     Rigidbody rb;
 
@@ -79,16 +78,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        timer -= Time.deltaTime;
-        if (timer < 0)
-        {
-            timer = timerMax;
-            if(state == MovementState.walking || state == MovementState.wallrun)
-            {
-                audioManager.PlaySFX(audioManager.run);
-
-            }
-        }
+        
         // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
         
@@ -159,12 +149,6 @@ public class PlayerController : MonoBehaviour
             state |= MovementState.walking;
             moveSpeed = walkSpeed;
         }
-
-        //else if (grounded)
-        //{
-        //    state |= MovementState.walking;
-        //    moveSpeed = walkSpeed;
-        //}
 
         //Mode - air
         else
@@ -250,12 +234,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.D) && isWallRight) 
                 {
             StartWallrun();
-            audioManager.PlaySFX(audioManager.run);
+            
         }
         if (Input.GetKey(KeyCode.A) && isWallLeft)
         {
             StartWallrun();
-            audioManager.PlaySFX(audioManager.run);
+           
         }
         
 
@@ -300,7 +284,7 @@ public class PlayerController : MonoBehaviour
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        SceneManager.LoadScene(5);
+        SceneManager.LoadScene(3);
     }
 
 

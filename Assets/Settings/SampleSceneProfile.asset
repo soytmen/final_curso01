@@ -24,7 +24,7 @@ MonoBehaviour:
     m_Value: 10
   scatter:
     m_OverrideState: 1
-    m_Value: 0.49
+    m_Value: 0.877
   clamp:
     m_OverrideState: 1
     m_Value: 65472
@@ -68,7 +68,7 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.15
+    m_Value: 0.191
   smoothness:
     m_OverrideState: 1
     m_Value: 1
